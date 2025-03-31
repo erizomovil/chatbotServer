@@ -15,7 +15,11 @@ GEMINI_API_KEY = "AIzaSyCtda6E8m4VOQXF0SjoqtH7N1UzKLAcMHs"
 genai.configure(api_key=GEMINI_API_KEY)
 
 app = Flask(__name__)
-CORS(app, resources={r"/*":{"origins":"*"}})
+CORS(app, resources={r"/*":{
+    "origins":"*",
+    "allow_headers": ["Content-Type", "Authorization"],
+    "methods": ["GET", "POST", "OPTIONS"] 
+}})
 load_dotenv()
 
 conversation_history = {"history": []}

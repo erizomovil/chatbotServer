@@ -148,7 +148,7 @@ def chat():
         return jsonify({'error': 'An error occurred on the server'}), 500
 
 @app.route('/app.py/button-action', methods=['GET'])
-def handle_options():
+def handle_get_options():
     return 'AYUDA', 200
 
 @app.route('/app.py/button-action', methods=['OPTIONS'])

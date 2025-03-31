@@ -32,7 +32,7 @@ CARPETA_ID = "1S3XB4JQ7JbCZWzje7JG480YbmUvCutQP"
 
 def authenticate_google_drive():
     try:
-        creds = service_account.Credentials.from_service_account_file(
+        creds = service_account.Credentials.from_service_account_info(
             credentials_dict, scopes=SCOPES)
         return build('drive', 'v3', credentials=creds)
     except Exception as e:

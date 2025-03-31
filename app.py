@@ -19,7 +19,7 @@ CORS(app, resources={r"/*":{
     "origins":"*",
     "allow_headers": ["Content-Type", "Authorization"],
     "methods": ["GET", "POST", "OPTIONS"] 
-}})
+}}, supports_credentials=True)
 load_dotenv()
 
 conversation_history = {"history": []}
@@ -111,6 +111,14 @@ def handle_basic_pdf_question(question):
             return f"Found this in {pdf_name}: {text[:500]}"  # Limit the text to 500 characters
     return "No relevant information found in the PDFs."
 
+@app.route('/chat', methods=['OPTIONS'])
+def handle_options():
+    response = jsonify({'message': 'CORS Preflight successful'})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+    return response
+
 @app.route('/chat', methods=['POST'])
 def chat():
     global conversation_history, pdfs_text, selected_pdf_for_information
@@ -153,7 +161,11 @@ def handle_get_options():
 
 @app.route('/app.py/button-action', methods=['OPTIONS'])
 def handle_options():
-    return '', 200
+    response = jsonify({'message': 'CORS Preflight successful'})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+    return response
 
 @app.route('/button-action', methods=['POST'])
 def button_action():

@@ -111,13 +111,7 @@ def handle_basic_pdf_question(question):
             return f"Found this in {pdf_name}: {text[:500]}"  # Limit the text to 500 characters
     return "No relevant information found in the PDFs."
 
-@app.route('/chat', methods=['OPTIONS'])
-def handle_options():
-    response = jsonify({'message': 'CORS Preflight successful'})
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
-    return response
+
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -156,16 +150,9 @@ def chat():
         return jsonify({'error': 'An error occurred on the server'}), 500
 
 @app.route('/app.py/button-action', methods=['GET'])
-def handle_get_options():
+def handle_get_options_button():
     return 'AYUDA', 200
 
-@app.route('/app.py/button-action', methods=['OPTIONS'])
-def handle_options():
-    response = jsonify({'message': 'CORS Preflight successful'})
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
-    return response
 
 @app.route('/button-action', methods=['POST'])
 def button_action():

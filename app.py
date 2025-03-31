@@ -147,6 +147,10 @@ def chat():
         print(f"Error processing the request: {e}")
         return jsonify({'error': 'An error occurred on the server'}), 500
 
+@app.route('/app.py/button-action', methods=['OPTIONS'])
+def handle_options():
+    return '', 200
+
 @app.route('/button-action', methods=['POST'])
 def button_action():
     global selected_pdf_for_information
